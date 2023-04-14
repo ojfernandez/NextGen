@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class Shoot : MonoBehaviour
 {
@@ -12,6 +11,7 @@ public class Shoot : MonoBehaviour
 
     public Transform firePoint;
     public GameObject eggPrefab;
+    public Slider slider;
 
     void Update()
     {
@@ -22,6 +22,7 @@ public class Shoot : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space) && Time.time > nextFire)
         {
+            slider.value = cooldown;
             GameObject egg = Instantiate(eggPrefab, firePoint.position, firePoint.rotation);
             Physics2D.IgnoreCollision(egg.GetComponent<Collider2D>(), GetComponent<Collider2D>());
             Rigidbody2D rb2d = egg.GetComponent<Rigidbody2D>();

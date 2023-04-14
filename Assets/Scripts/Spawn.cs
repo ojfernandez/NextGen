@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Spawn : MonoBehaviour
@@ -8,7 +7,7 @@ public class Spawn : MonoBehaviour
 
     public GameObject planePrefab;
 
-    public Stats gui;
+    [SerializeField] private Stats _gui;
 
     private void Start()
     {
@@ -22,7 +21,7 @@ public class Spawn : MonoBehaviour
     {
         if (GameObject.FindGameObjectsWithTag("Enemy").Length < maxEnemies)
         {
-            gui.Score();
+            _gui.Score();
             Instantiate(planePrefab, RandomPos(), Quaternion.Euler(0, 0, 0));
         }
     }

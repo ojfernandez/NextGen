@@ -16,7 +16,7 @@ public class DestroyEgg : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.CompareTag("Enemy"))
+        if (collider.CompareTag("Enemy") || collider.CompareTag("Waypoint"))
         {
             Debug.Log("Hit!");
             Destroy(this.gameObject);

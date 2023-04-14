@@ -7,18 +7,19 @@ public class Stats : MonoBehaviour
 
     private int destroyed = 0;
     private string mode;
+    private string point;
 
     void Start()
     {
-        _stats.text = "Eggs: \nEnemies: \nDestroyed: \nDriveMode: ";
+        _stats.text = "Eggs: \nDestroyed: \nDrive Mode: \nWaypoint Mode: ";
     }
 
     void Update()
     {
         _stats.text = "Eggs: " + GameObject.FindGameObjectsWithTag("Projectile").Length +
-                      "\nEnemies: " + GameObject.FindGameObjectsWithTag("Enemy").Length +
                       "\nDestroyed: " + destroyed.ToString() +
-                      "\nDrive Mode: " + mode;
+                      "\nDrive Mode: " + mode + 
+                      "\nWaypoint Mode: " + point;
     }
 
     public void Score()
@@ -35,6 +36,18 @@ public class Stats : MonoBehaviour
         else
         {
             mode = "Keys";
+        }
+    }
+
+    public void WaypointMode(bool waypoint)
+    {
+        if (waypoint)
+        {
+            point = "Sequence";
+        }
+        else
+        {
+            point = "Random";
         }
     }
 }

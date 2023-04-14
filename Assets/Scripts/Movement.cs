@@ -7,12 +7,12 @@ public class Movement : MonoBehaviour
     public float rotate = 1f;
 
     private Rigidbody2D rb2d;
-    public Stats gui;
+    [SerializeField] private Stats _gui;
 
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
-        gui.DriveMode(mouse);
+        _gui.DriveMode(mouse);
     }
 
     void Update()
@@ -21,7 +21,7 @@ public class Movement : MonoBehaviour
         {
             rb2d.velocity = Vector3.zero;
             mouse = !mouse;
-            gui.DriveMode(mouse);
+            _gui.DriveMode(mouse);
         }
 
         if (!mouse)
