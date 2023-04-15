@@ -38,6 +38,38 @@ public class Ways : MonoBehaviour
             }
         }
     }
+    
+    public GameObject Get_Next_Waypoint( GameObject _cur_waypoint = null)
+    {
+        if (!sequence)
+        {
+            return waypoints[Random.Range(0, waypoints.Count-1)];
+        }
+        
+        if (_cur_waypoint == null)
+        {
+            _cur_waypoint = waypoints[Random.Range(0, waypoints.Count-1)];
+        }
+        var ind = 0;
+        for (int i = 0; i < waypoints.Count; i++)
+        {
+            if (_cur_waypoint == waypoints[i])
+            {
+                ind = i;
+                i = waypoints.Count + 1;
+            }
+        }
+
+        if (ind >= waypoints.Count-1)
+        {
+            ind = 0;
+        }
+        else
+        {
+            ind++;
+        }
+        return waypoints[ind];
+    }
 
     public float GetFadeDeg()
     {

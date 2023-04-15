@@ -1,9 +1,18 @@
+using System;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
     public int health = 4;
     public float fadeMulti = 0.8f;
+    
+   
+    private float move_speed = 10f;
+    private float rotate_speed = 90f;
+    
+    private GameObject next_waypoint;
+    private Vector3 movement_dir;
+    private Ways waypoint_manager;
 
     private Color fade;
 
@@ -11,6 +20,8 @@ public class Enemy : MonoBehaviour
     {
         GetComponent<Collider2D>().isTrigger = true;
         fade = GetComponent<SpriteRenderer>().color;
+        waypoint_manager = GameObject.Find("Waypoints").GetComponent<Ways>();
+        next_waypoint = waypoint_manager.Get_Next_Waypoint();
     }
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -33,6 +44,27 @@ public class Enemy : MonoBehaviour
                 fade.a *= fadeMulti;
                 this.GetComponent<SpriteRenderer>().color = fade;
             }
+        }
+    }
+
+    private void Update()
+    {
+        float distance = Vector3.Distance(transform.position, next_waypoint.transform.position);
+        var dis_threshhold = 50f;
+        if (distance > dis_threshhold)
+        {
+            float angle = Mathf.Atan2(next_waypoint.transform.position.y - transform.position.y, next_waypoint.transform.position.x -transform.position.x ) * Mathf.Rad2Deg;
+            Quaternion targetRotation = Quaternion.Euler(new Vector3(0, 0, angle));
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotate_speed * Time.deltaTime);
+            
+            // Move the object in the direction of the move direction
+            transform.position += transform.rotation * new Vector3(1,1,1) * move_speed * Time.deltaTime;
+            transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+        }
+        else
+        {
+            next_waypoint = waypoint_manager.Get_Next_Waypoint(next_waypoint);
+            Debug.Log("Getting next");
         }
     }
 }
