@@ -15,6 +15,7 @@ public class Waypoint : MonoBehaviour
         GetComponent<Collider2D>().isTrigger = true;
         fade = GetComponent<SpriteRenderer>().color;
         fadeDeg = _ways.GetFadeDeg();
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
     }
 
     private void MovePoint()

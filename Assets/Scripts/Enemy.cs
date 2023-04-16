@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour
         fade = GetComponent<SpriteRenderer>().color;
         waypoint_manager = GameObject.Find("Waypoints").GetComponent<Ways>();
         next_waypoint = waypoint_manager.Get_Next_Waypoint();
+        transform.position = new Vector3(transform.position.x, transform.position.y, 0);
     }
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -50,7 +51,7 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         float distance = Vector3.Distance(transform.position, next_waypoint.transform.position);
-        var dis_threshhold = 50f;
+        var dis_threshhold = 10f;
         if (distance > dis_threshhold)
         {
             float angle = Mathf.Atan2(next_waypoint.transform.position.y - transform.position.y, next_waypoint.transform.position.x -transform.position.x ) * Mathf.Rad2Deg;
@@ -59,12 +60,16 @@ public class Enemy : MonoBehaviour
             
             // Move the object in the direction of the move direction
             transform.position += transform.rotation * new Vector3(1,1,1) * move_speed * Time.deltaTime;
-            transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+            
         }
         else
         {
+            Debug.Log("   ");
+            Debug.Log(next_waypoint);
             next_waypoint = waypoint_manager.Get_Next_Waypoint(next_waypoint);
             Debug.Log("Getting next");
+            Debug.Log(next_waypoint);
+            Debug.Log("   ");
         }
     }
 }
