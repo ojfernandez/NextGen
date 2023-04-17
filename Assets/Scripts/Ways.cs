@@ -33,8 +33,8 @@ public class Ways : MonoBehaviour
             active = !active;
             for (int i = 0; i < waypoints.Count; i++)
             {
-                waypoints[i].GetComponent<Renderer>().enabled = active;
-                waypoints[i].GetComponent<Collider2D>().enabled = active;
+                Debug.Log(i);
+                waypoints[i].GetComponent<SpriteRenderer>().enabled = active;
             }
         }
     }
