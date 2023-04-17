@@ -13,7 +13,7 @@ public class Spawn : MonoBehaviour
     {
         while (GameObject.FindGameObjectsWithTag("Enemy").Length < maxEnemies)
         {
-            Instantiate(planePrefab, RandomPos(), Quaternion.Euler(0, 0, 0));
+            Instantiate(planePrefab, RandomPos() * new Vector3(1,1,0), Quaternion.Euler(0, 0, 0));
         }
     }
 
@@ -22,7 +22,7 @@ public class Spawn : MonoBehaviour
         if (GameObject.FindGameObjectsWithTag("Enemy").Length < maxEnemies)
         {
             _gui.Score();
-            Instantiate(planePrefab, RandomPos(), Quaternion.Euler(0, 0, 0));
+            Instantiate(planePrefab, RandomPos() * new Vector3(1,1,0), Quaternion.Euler(0, 0, 0));
         }
     }
 
