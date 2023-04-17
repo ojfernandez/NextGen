@@ -6,9 +6,9 @@ public class Waypoint : MonoBehaviour
 
     private Color fade;
     private float fadeDeg;
+    private bool intang;
 
     [SerializeField] private Ways _ways;
-    [SerializeField] private GameObject _next;
 
     void Start()
     {
@@ -38,7 +38,7 @@ public class Waypoint : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collider)
     {
         
-        if (collider.CompareTag("Projectile"))
+        if (collider.CompareTag("Projectile") && !intang)
         {
             Debug.Log("Splat!");
             fade.a -= fadeDeg;
@@ -53,4 +53,8 @@ public class Waypoint : MonoBehaviour
         }
     }
 
+    public void Hidden(bool active)
+    {
+        intang = active;
+    }
 }

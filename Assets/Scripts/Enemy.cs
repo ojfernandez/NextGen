@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -11,7 +10,6 @@ public class Enemy : MonoBehaviour
     private float rotate_speed = 90f;
     
     private GameObject next_waypoint;
-    private Vector3 movement_dir;
     private Ways waypoint_manager;
 
     private Color fade;
@@ -59,16 +57,12 @@ public class Enemy : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotate_speed * Time.deltaTime);
             
             // Move the object in the direction of the move direction
-            transform.position += transform.up * move_speed * Time.deltaTime;
+            transform.position += move_speed * Time.deltaTime * transform.up;
         }
         else
         {
-            Debug.Log("   ");
-            Debug.Log(next_waypoint);
             next_waypoint = waypoint_manager.Get_Next_Waypoint(next_waypoint);
-            Debug.Log("Getting next");
-            Debug.Log(next_waypoint);
-            Debug.Log("   ");
+            Debug.Log("Next waypoint: " + next_waypoint);
         }
     }
 }

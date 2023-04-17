@@ -16,10 +16,10 @@ public class Stats : MonoBehaviour
 
     void Update()
     {
-        _stats.text = "Eggs: " + GameObject.FindGameObjectsWithTag("Projectile").Length +
-                      "\nDestroyed: " + destroyed.ToString() +
-                      "\nDrive Mode: " + mode + 
-                      "\nWaypoint Mode: " + point;
+        _stats.text = " Eggs: " + GameObject.FindGameObjectsWithTag("Projectile").Length +
+                      "\n Destroyed: " + destroyed.ToString() +
+                      "\n Drive Mode: " + mode + 
+                      "\n Waypoint Mode: " + point;
     }
 
     public void Score()
