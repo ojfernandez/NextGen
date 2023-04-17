@@ -16,13 +16,14 @@ public class Shoot : MonoBehaviour
     void Update()
     {
         ShootEgg();
+        slider.value = 1-((nextFire - Time.time) / cooldown);
     }
 
     private void ShootEgg()
     {
         if (Input.GetKey(KeyCode.Space) && Time.time > nextFire)
         {
-            slider.value = cooldown;
+            
             GameObject egg = Instantiate(eggPrefab, firePoint.position, firePoint.rotation);
             Physics2D.IgnoreCollision(egg.GetComponent<Collider2D>(), GetComponent<Collider2D>());
             Rigidbody2D rb2d = egg.GetComponent<Rigidbody2D>();
